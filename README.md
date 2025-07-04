@@ -7,6 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Descrição do Projeto
+
+Este é um site para cadastro de clientes de um ateliê, que tem como objetivo facilitar a gestão dos pedidos realizados. O sistema oferece as seguintes funcionalidades:
+
+- **Cadastro de clientes:** Registro completo dos dados pessoais dos clientes.
+- **Tipo de pedido:** Classificação dos tipos de pedidos realizados no ateliê.
+- **Classificação de pedidos:** Organização e categorização dos pedidos para melhor controle.
+- **Armazenamento dos dados:** Todas as informações são armazenadas em um banco de dados MySQL para garantir segurança e facilidade no acesso.
+- **Valor do pedido:** Controle do valor financeiro de cada pedido realizado por cliente.
+- **Status do pedido:** Acompanhamento do andamento do pedido (ex: em produção, pronto, entregue).
+- **Dados de entrega:** Inclusão das informações de entrega, como endereço completo e número de telefone para contato.
+
+Este sistema visa otimizar o fluxo de trabalho do ateliê, garantindo mais organização e eficiência na gestão dos pedidos e clientes.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
@@ -59,3 +73,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
