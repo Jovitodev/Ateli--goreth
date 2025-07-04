@@ -18,11 +18,19 @@ class ClienteController extends Controller
         return view('clientes.create');
     }
 
-    public function store(Request $request)
-    {
-        Cliente::create($request->all());
-        return redirect()->route('clientes.index');
-    }
+   public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nome' => 'required|string|max:100',
+        'cpf' => 'required|string|unique:clientes,cpf',
+        'idade' => 'required|integer',
+        'local' => 'required|string|max:100',
+    ]);
+
+    Cliente::create($validated);
+
+    return redirect()->back()->with('success', 'Cliente cadastrado com sucesso!');
+}
 
     public function edit($id)
     {
