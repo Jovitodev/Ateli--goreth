@@ -8,35 +8,73 @@ use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
+    public function create(Request $request)
+    {
+        $cliente_id = $request->get('cliente_id');
+        $clientes = \App\Models\Cliente::all(); // isso evita o erro de variável não definida
+        return view('pedidos.create', compact('cliente_id', 'clientes'));
+    }
+
     public function store(Request $request)
-{
-    $request->validate([
-        'cliente_id' => 'required|exists:clientes,id',
-        'tipo' => 'required|string',
-        'valor' => 'required|numeric',
-        'pago' => 'required|boolean',
-        'status' => 'required|string',
-    ]);
+    {
+        //dd($request->all());
+        $validated = $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'tipo_pedido' => 'required|string',
+            'valor' => 'required|numeric',
+            'status_pagamento' => 'required|string',
+            'status_execucao' => 'required|string',
+        ]);
 
-    Pedido::create([
-        'cliente_id' => $request->cliente_id,
-        'tipo' => $request->tipo,
-        'valor' => $request->valor,
-        'pago' => $request->pago,
-        'status' => $request->status,
-        
-    ]);
 
-    return redirect()->route('pedidos.create')->with('success', 'Pedido salvo com sucesso!');
-}
-    public function create()
-{
-    $clientes = Cliente::all();
-    return view('pedidos.create', compact('clientes'));
-}
-    public function index()
-{
-    $pedidos = Pedido::with('cliente')->get(); // carrega os dados do cliente junto
-    return view('pedidos.index', compact('pedidos'));
-}
+
+        Pedido::create($validated);
+
+        return redirect()->route('pedidos.index')->with('success', 'Pedido criado com sucesso!');
+    }
+
+    public function index(Request $request)
+    {
+        $cliente_id = $request->get('cliente_id');
+
+        if (!$cliente_id) {
+            return redirect()->route('clientes.index')->with('error', 'Cliente não especificado.');
+    }
+
+        $pedidos = Pedido::with('cliente')->where('cliente_id', $cliente_id)->get();
+
+            return view('pedidos.index', compact('pedidos', 'cliente_id'));
+    }
+
+    public function preview(Request $request)
+    {
+         $validated = $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'tipo_pedido' => 'required|string',
+            'valor' => 'required|numeric',
+            'status_pagamento' => 'required|string',
+            'status_execucao' => 'required|string',
+        ]);
+
+        $cliente = Cliente::find($validated['cliente_id']);
+
+             return view('pedidos.preview', compact('validated', 'cliente'));
+    }
+
+    public function confirm(Request $request)
+    {
+        $validated = $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'tipo_pedido' => 'required|string',
+            'valor' => 'required|numeric',
+            'status_pagamento' => 'required|string',
+            'status_execucao' => 'required|string',
+        ]);
+
+        Pedido::create($validated);
+
+        return redirect()->route('pedidos.index', ['cliente_id' => $validated['cliente_id']])
+            ->with('success', 'Pedido cadastrado com sucesso!');
+    }
+
 }

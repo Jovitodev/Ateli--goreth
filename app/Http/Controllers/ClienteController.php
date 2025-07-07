@@ -20,16 +20,18 @@ class ClienteController extends Controller
 
    public function store(Request $request)
 {
-    $validated = $request->validate([
-        'nome' => 'required|string|max:100',
-        'cpf' => 'required|string|unique:clientes,cpf',
+    $validatedData = $request->validate([
+        'nome' => 'required|string|max:255',
+        'cpf' => 'required|string|max:14|unique:clientes',
         'idade' => 'required|integer',
-        'local' => 'required|string|max:100',
+        'local' => 'nullable|string|max:255',
     ]);
 
-    Cliente::create($validated);
+    $cliente = Cliente::create($validatedData);
 
-    return redirect()->back()->with('success', 'Cliente cadastrado com sucesso!');
+    // Redireciona para a página de criação de pedidos, passando o ID do cliente
+    return redirect()->route('pedidos.create', ['cliente_id' => $cliente->id])
+        ->with('success', 'Cliente cadastrado com sucesso! Agora cadastre um pedido.');
 }
 
     public function edit($id)
@@ -42,7 +44,7 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::findOrFail($id);
         $cliente->update($request->all());
-        return redirect()->route('clientes.index');
+        return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -51,5 +53,18 @@ class ClienteController extends Controller
         $cliente->delete();
         return redirect()->route('clientes.index');
     }
+
+    public function pedidos()
+    {
+        return $this->hasMany(\App\Models\Pedido::class);
+    }   
+
+
+    public function show($id)
+{
+    $cliente = Cliente::with('pedidos')->findOrFail($id);
+    return view('clientes.show', compact('cliente'));
+}
+
 }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cadastrar Cliente</title>
+    <title> - Atelier Goreth's - </title>
     <meta charset="utf-8">
     <style>
         body {
@@ -23,10 +23,21 @@
             margin-top: 15px;
             padding: 10px 20px;
         }
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #ccc;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <h1>Novo Cliente</h1>
+    <h1>- Atelier Goreth's -</h1>
+    <br>
+    <h2>Cadastrar Novo Cliente</h2>
 
     @if ($errors->any())
         <div style="color: red;">
@@ -61,5 +72,7 @@
 
         <button type="submit">Salvar</button>
     </form>
+
+    <a href="{{ route('clientes.index') }}" class="btn-voltar">Voltar</a>
 </body>
 </html>

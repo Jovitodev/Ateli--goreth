@@ -26,4 +26,13 @@
 </table>
 
 <br>
-<a href="{{ route('pedidos.create') }}">Criar novo pedido</a>
+<div style="margin-bottom: 20px;">
+    <a href="{{ route('clientes.index') }}" style="margin-right: 10px;">Voltar para lista de clientes</a>
+
+    {{-- Passa o cliente_id na URL --}}
+    <a href="{{ route('pedidos.create', ['cliente_id' => $cliente_id]) }}" style="margin-right: 10px;">
+        Adicionar outro pedido
+    </a>
+
+    <a href="{{ url('/') }}">Página inicial</a>
+</div>

@@ -13,13 +13,16 @@ return new class extends Migration
 {
     Schema::create('pedidos', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('cliente_id')->constrained('clientes')->onDelete('cascade');
+        $table->unsignedBigInteger('cliente_id'); // FK para clientes
         $table->string('tipo_pedido');
-        $table->decimal('valor', 8, 2);
-        $table->enum('status_pagamento', ['pago', 'pendente'])->default('pendente');
-        $table->enum('status_execucao', ['em andamento', 'concluído', 'cancelado'])->default('em andamento');
+        $table->decimal('valor', 10, 2);
+        $table->string('status_pagamento');
+        $table->string('status_execucao');
         $table->timestamps();
+
+        $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
     });
+
 }
 
 
