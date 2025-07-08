@@ -59,12 +59,17 @@ class ClienteController extends Controller
         return $this->hasMany(\App\Models\Pedido::class);
     }   
 
-
+    public function verPedidos($id)
+    {
+    $cliente = Cliente::with('pedidos')->findOrFail($id);
+    return view('clientes.pedidos', compact('cliente'));
+    }
+    
     public function show($id)
-{
+    {
     $cliente = Cliente::with('pedidos')->findOrFail($id);
     return view('clientes.show', compact('cliente'));
-}
+    }
 
 }
 

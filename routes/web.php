@@ -14,6 +14,12 @@ Route::get('/pedidos/todos', [HomeController::class, 'todosPedidos'])->name('hom
 Route::resource('clientes', ClienteController::class);
 Route::get('/clientes/{id}', [ClienteController::class, 'show'])->name('clientes.show');
 
+// Ver pedidos de um cliente específico
+Route::get('/clientes/{cliente}/pedidos', [ClienteController::class, 'verPedidos'])->name('clientes.pedidos');
+
+// Atualizar pedido
+Route::put('/pedidos/{pedido}', [PedidoController::class, 'update'])->name('pedidos.update');
+
 // Rotas alternativas (não são mais necessárias se usar resource)
 Route::get('/cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
 Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');

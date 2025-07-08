@@ -77,4 +77,22 @@ class PedidoController extends Controller
             ->with('success', 'Pedido cadastrado com sucesso!');
     }
 
+
+    public function update(Request $request, Pedido $pedido)
+    {
+    $request->validate([
+        'tipo_pedido' => 'required|string|max:255',
+        'status_pagamento' => 'required|in:sim,não',
+        'status_execucao' => 'required|in:não concluído,pendente,em andamento,aprovação,concluído',
+    ]);
+
+    $pedido->update([
+        'tipo_pedido' => $request->tipo_pedido,
+        'status_pagamento' => $request->status_pagamento,
+        'status_execucao' => $request->status_execucao,
+    ]);
+
+    return redirect()->route('clientes.pedidos', $pedido->cliente_id)
+                     ->with('success', 'Pedido atualizado com sucesso.');
+    }
 }
