@@ -39,20 +39,7 @@ Este projeto é um sistema web desenvolvido com **Laravel** para gerenciamento d
 - **HTML/CSS puro (sem framework frontend no momento)**
 
 ---
-
-## ⚙️ Configuração do Banco de Dados
-
-O projeto utiliza PostgreSQL. Configure seu `.env` conforme o exemplo abaixo para conectar ao banco:
-
-```env
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_DATABASE=projeto_atelier
-DB_USERNAME=seu_usuario
-DB_PASSWORD=sua_senha
-
-##📁 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ├── app/
 │   ├── Http/
@@ -78,14 +65,31 @@ DB_PASSWORD=sua_senha
 │   └── database.php
 └── .env
 
-🧩 Como Rodar o Projeto Localmente
+---
+
+## ⚙️ Configuração do Banco de Dados
+
+O projeto utiliza PostgreSQL. Configure seu `.env` conforme o exemplo abaixo para conectar ao banco:
+
+env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=projeto_atelier
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+
+---
+
+## 🧩 Como Rodar o Projeto Localmente
 
     Clone o repositório:
+    git clone https://github.com/seuusuario/seurepositorio.git
+    cd seurepositorio
+    
+---
 
-git clone https://github.com/seuusuario/seurepositorio.git
-cd seurepositorio
-
-    Instale as dependências:
+Instale as dependências:
 
 composer install
 
@@ -111,7 +115,7 @@ php artisan serve
 
 http://localhost:8000
 
-📝 Exemplos de Consultas Avançadas no Banco
+## 📝 Exemplos de Consultas Avançadas no Banco
 
     Consulta com função agregada (ex: total de pedidos por cliente)
 
@@ -121,33 +125,12 @@ http://localhost:8000
 
     Triggers para ações automáticas no banco
 
-🖼️ Imagens do Projeto
-Tela inicial
-
-Cadastro de Clientes
-
-Lista de Pedidos
-
-(Substitua os caminhos acima pelas imagens do seu projeto)
-🤝 Contribuições
-
-Contribuições são bem-vindas! Para contribuir:
-
-    Faça um fork do projeto
-
-    Crie uma branch com sua feature: git checkout -b minha-feature
-
-    Faça commit das suas alterações: git commit -m 'Minha nova feature'
-
-    Envie para o repositório remoto: git push origin minha-feature
-
-    Abra um Pull Request
 
 📫 Contato
 
 João Victor Oliveira
-Email: joaovictor@email.com
-GitHub: https://github.com/joaovictor
+Email: jvo.santos@dicente.ufma.br
+GitHub: https://github.com/Jovitodev
 📜 Histórico de Alterações
 
     2025-07-14: Migração do banco de dados de MySQL para PostgreSQL, atualização das configurações do projeto.
