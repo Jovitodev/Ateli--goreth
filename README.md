@@ -1,6 +1,6 @@
 # 🧵 Atelier Goreth's — Sistema de Cadastro de Clientes e Pedidos
 
-Este projeto é um sistema web desenvolvido com Laravel para gerenciamento de clientes e pedidos do **Atelier Goreth's**. O objetivo é oferecer uma plataforma simples e eficiente para organizar os dados de clientes e seus respectivos pedidos, com funcionalidades básicas de CRUD.
+Este projeto é um sistema web desenvolvido com **Laravel** para gerenciamento de clientes e pedidos do **Atelier Goreth's**. O objetivo é oferecer uma plataforma simples e eficiente para organizar os dados de clientes e seus respectivos pedidos, com funcionalidades básicas de CRUD.
 
 ---
 
@@ -32,17 +32,28 @@ Este projeto é um sistema web desenvolvido com Laravel para gerenciamento de cl
 
 ## 🛠 Tecnologias Utilizadas
 
-- **PHP 8+**
-- **Laravel 10+**
+- **PHP 8.2+**
+- **Laravel 12+**
+- **PostgreSQL** (atualizado de MySQL para melhor desempenho)
 - **Blade (Template Engine)**
-- **MySQL**
 - **HTML/CSS puro (sem framework frontend no momento)**
 
 ---
 
-## 📁 Estrutura do Projeto
+## ⚙️ Configuração do Banco de Dados
 
-```bash
+O projeto utiliza PostgreSQL. Configure seu `.env` conforme o exemplo abaixo para conectar ao banco:
+
+```env
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=projeto_atelier
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+
+##📁 Estrutura do Projeto
+
 ├── app/
 │   ├── Http/
 │   │   └── Controllers/
@@ -57,5 +68,92 @@ Este projeto é um sistema web desenvolvido com Laravel para gerenciamento de cl
 │       │   └── show.blade.php
 │       └── pedidos/
 │           ├── create.blade.php
+│           └── index.blade.php
 ├── routes/
 │   └── web.php
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── config/
+│   └── database.php
+└── .env
+
+🧩 Como Rodar o Projeto Localmente
+
+    Clone o repositório:
+
+git clone https://github.com/seuusuario/seurepositorio.git
+cd seurepositorio
+
+    Instale as dependências:
+
+composer install
+
+    Configure o arquivo .env com suas credenciais do PostgreSQL.
+
+    Gere a chave da aplicação:
+
+php artisan key:generate
+
+    Execute as migrations para criar as tabelas no banco:
+
+php artisan migrate
+
+    (Opcional) Popule o banco com dados de exemplo:
+
+php artisan db:seed
+
+    Inicie o servidor local:
+
+php artisan serve
+
+    Acesse o sistema em:
+
+http://localhost:8000
+
+📝 Exemplos de Consultas Avançadas no Banco
+
+    Consulta com função agregada (ex: total de pedidos por cliente)
+
+    Consulta com cláusula HAVING para filtrar grupos
+
+    Funções customizadas no PostgreSQL para lógica de negócio
+
+    Triggers para ações automáticas no banco
+
+🖼️ Imagens do Projeto
+Tela inicial
+
+Cadastro de Clientes
+
+Lista de Pedidos
+
+(Substitua os caminhos acima pelas imagens do seu projeto)
+🤝 Contribuições
+
+Contribuições são bem-vindas! Para contribuir:
+
+    Faça um fork do projeto
+
+    Crie uma branch com sua feature: git checkout -b minha-feature
+
+    Faça commit das suas alterações: git commit -m 'Minha nova feature'
+
+    Envie para o repositório remoto: git push origin minha-feature
+
+    Abra um Pull Request
+
+📫 Contato
+
+João Victor Oliveira
+Email: joaovictor@email.com
+GitHub: https://github.com/joaovictor
+📜 Histórico de Alterações
+
+    2025-07-14: Migração do banco de dados de MySQL para PostgreSQL, atualização das configurações do projeto.
+
+    Data anterior: Versão inicial com MySQL.
+
+⚖️ Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para detalhes.
