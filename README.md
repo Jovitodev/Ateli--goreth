@@ -128,18 +128,27 @@ http://localhost:8000
     Implementação de funções customizadas no PostgreSQL para regras de negócio
 
     Triggers para automações no banco de dados
+    
+--- 
 
-📫 Contato
+##📫 Contato
 
 João Victor Oliveira
+
 Email: jvo.santos@dicente.ufma.br
+
 GitHub: https://github.com/Jovitodev
-📜 Histórico de Versões
+
+---
+
+##📜 Histórico de Versões
 
     2025-07-14: Migração do banco de dados de MySQL para PostgreSQL e atualização das configurações do projeto.
 
     Versão inicial com MySQL em datas anteriores.
 
-⚖️ Licença
+---
+
+##⚖️ Licença
 
 Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
