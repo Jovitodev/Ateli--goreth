@@ -41,7 +41,7 @@ Este é um sistema web desenvolvido com **Laravel** para gerenciar clientes e pe
 ---
 
 ## 📁 Estrutura do Projeto
-
+```
 ├── app/
 │ ├── Http/
 │ │ └── Controllers/
@@ -65,7 +65,7 @@ Este é um sistema web desenvolvido com **Laravel** para gerenciar clientes e pe
 ├── config/
 │ └── database.php
 └── .env
-
+```
 
 ---
 
@@ -80,41 +80,46 @@ DB_PORT=5432
 DB_DATABASE=projeto_atelier
 DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
+```
+---
 
-🧩 Como Executar o Projeto Localmente
+##🧩 Como Executar o Projeto Localmente
 
-    Clone o repositório:
-
+Clone o repositório:
+```
 git clone https://github.com/seuusuario/seurepositorio.git
 cd seurepositorio
+```
 
-    Instale as dependências do Composer:
-
+Instale as dependências do Composer:
+    
+```
 composer install
+```
 
-    Configure o arquivo .env com suas credenciais do PostgreSQL.
+Configure o arquivo .env com suas credenciais do PostgreSQL.
 
-    Gere a chave da aplicação:
-
+Gere a chave da aplicação:
+```
 php artisan key:generate
-
-    Rode as migrations para criar as tabelas no banco:
-
+```
+Rode as migrations para criar as tabelas no banco:
+```
 php artisan migrate
-
-    (Opcional) Popule o banco com dados iniciais:
-
+```
+(Opcional) Popule o banco com dados iniciais:
+```
 php artisan db:seed
-
-    Inicie o servidor local:
-
+```
+Inicie o servidor local:
+```
 php artisan serve
-
-    Acesse o sistema pelo navegador em:
-
+```
+ Acesse o sistema pelo navegador em:
+```
 http://localhost:8000
-
-📝 Consultas Avançadas no Banco de Dados
+```
+##📝 Consultas Avançadas no Banco de Dados
 
     Uso de funções agregadas (exemplo: total de pedidos por cliente)
 
