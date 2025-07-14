@@ -40,7 +40,7 @@ Este é um sistema web desenvolvido com **Laravel** para gerenciar clientes e pe
 
 ---
 
-## 📁 Estrutura do Projeto
+### 📁 Estrutura do Projeto
 ```
 ├── app/
 │ ├── Http/
@@ -69,7 +69,7 @@ Este é um sistema web desenvolvido com **Laravel** para gerenciar clientes e pe
 
 ---
 
-## ⚙️ Configuração do Banco de Dados
+### ⚙️ Configuração do Banco de Dados
 
 Este projeto utiliza PostgreSQL. Configure seu arquivo `.env` com os dados do seu banco de dados:
 
@@ -83,7 +83,7 @@ DB_PASSWORD=sua_senha
 ```
 ---
 
-##🧩 Como Executar o Projeto Localmente
+### 🧩 Como Executar o Projeto Localmente
 
 Clone o repositório:
 ```
@@ -119,7 +119,7 @@ php artisan serve
 ```
 http://localhost:8000
 ```
-##📝 Consultas Avançadas no Banco de Dados
+### 📝 Consultas Avançadas no Banco de Dados
 
     Uso de funções agregadas (exemplo: total de pedidos por cliente)
 
@@ -131,7 +131,7 @@ http://localhost:8000
     
 --- 
 
-##📫 Contato
+### 📫 Contato
 
 João Victor Oliveira
 
@@ -141,7 +141,7 @@ GitHub: https://github.com/Jovitodev
 
 ---
 
-##📜 Histórico de Versões
+### 📜 Histórico de Versões
 
     2025-07-14: Migração do banco de dados de MySQL para PostgreSQL e atualização das configurações do projeto.
 
@@ -149,6 +149,6 @@ GitHub: https://github.com/Jovitodev
 
 ---
 
-##⚖️ Licença
+### ⚖️ Licença
 
 Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
