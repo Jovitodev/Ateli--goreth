@@ -13,13 +13,10 @@ class HomeController extends Controller
 
         return view('home', compact('pedidos'));
     }
-    
+
     public function todosPedidos()
     {
-    $pedidos = Pedido::with('cliente')->get();
-
-    return view('home_pedidos', compact('pedidos'));
+        $pedidos = \App\Models\Pedido::with('cliente')->get();
+        return view('pedidos.index-kanban', compact('pedidos'));
     }
-
 }
-

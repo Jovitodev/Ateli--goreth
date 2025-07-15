@@ -9,29 +9,24 @@ use App\Http\Controllers\PedidoController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/pedidos/todos', [HomeController::class, 'todosPedidos'])->name('home.pedidos');
 
-
 // Clientes
 Route::resource('clientes', ClienteController::class);
 Route::get('/clientes/{id}', [ClienteController::class, 'show'])->name('clientes.show');
-
-// Ver pedidos de um cliente específico
+Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit'])->name('clientes.edit');
 Route::get('/clientes/{cliente}/pedidos', [ClienteController::class, 'verPedidos'])->name('clientes.pedidos');
 
-// Atualizar pedido
-Route::put('/pedidos/{pedido}', [PedidoController::class, 'update'])->name('pedidos.update');
-
-// Rotas alternativas (não são mais necessárias se usar resource)
-Route::get('/cliente/create', [ClienteController::class, 'create'])->name('cliente.create');
-Route::post('/cliente', [ClienteController::class, 'store'])->name('cliente.store');
-Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente.index');
-
 // Pedidos
-Route::resource('pedidos', PedidoController::class);
-Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
-Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
-Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+// ✅ Coloque o kanban ANTES do resource para evitar conflito
+Route::get('/pedidos/kanban', [PedidoController::class, 'kanban'])->name('pedidos.kanban');
 
+// ✅ Resource só uma vez, e DEPOIS do /kanban
+Route::resource('pedidos', PedidoController::class);
+
+// ✅ Outras rotas personalizadas
 Route::post('/pedidos/preview', [PedidoController::class, 'preview'])->name('pedidos.preview');
 Route::post('/pedidos/confirmar', [PedidoController::class, 'confirm'])->name('pedidos.confirm');
-Route::get('/pedidos/{pedido}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
-Route::put('/pedidos/{pedido}', [PedidoController::class, 'update'])->name('pedidos.update');
+
+// (opcional, pois o resource já cobre essas)
+// Route::get('/pedidos/{pedido}/edit', [PedidoController::class, 'edit'])->name('pedidos.edit');
+// Route::put('/pedidos/{pedido}', [PedidoController::class, 'update'])->name('pedidos.update');
+// Route::delete('/pedidos/{id}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');

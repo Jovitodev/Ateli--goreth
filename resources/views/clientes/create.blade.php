@@ -1,78 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title> - Atelier Goreth's - </title>
     <meta charset="utf-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-        form {
-            max-width: 400px;
-        }
-        label {
-            margin-top: 10px;
-            display: block;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-        }
-        .btn-voltar {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #ccc;
-            color: #000;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Cadastrar Cliente - Atelier Goreth's</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>- Atelier Goreth's -</h1>
-    <br>
-    <h2>Cadastrar Novo Cliente</h2>
+<body class="bg-light">
 
-    @if ($errors->any())
-        <div style="color: red;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('clientes.index') }}">← Voltar | Cadastro de Cliente</a>
         </div>
-    @endif
+    </nav>
 
-    @if (session('success'))
-        <div style="color: green;">
-            {{ session('success') }}
-        </div>
-    @endif
+    <div class="container">
+        <h2 class="mb-4">📝 Cadastrar Novo Cliente</h2>
 
-    <form method="POST" action="{{ route('clientes.store') }}">
-        @csrf
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Erros encontrados:</strong>
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" required>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-        <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" required placeholder="000.000.000-00">
+        <form method="POST" action="{{ route('clientes.store') }}" class="card p-4 shadow-sm bg-white">
+            @csrf
 
-        <label for="idade">Idade:</label>
-        <input type="number" name="idade" id="idade" required>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" name="nome" id="nome" class="form-control" required>
+            </div>
 
-        <label for="local">Local:</label>
-        <input type="text" name="local" id="local" required>
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF:</label>
+                <input type="text" name="cpf" id="cpf" class="form-control" placeholder="000.000.000-00" required>
+            </div>
 
-        <button type="submit">Salvar</button>
-    </form>
+            <div class="mb-3">
+                <label for="idade" class="form-label">Idade:</label>
+                <input type="number" name="idade" id="idade" class="form-control" required>
+            </div>
 
-    <a href="{{ route('clientes.index') }}" class="btn-voltar">Voltar</a>
+            <div class="mb-3">
+                <label for="local" class="form-label">Local:</label>
+                <input type="text" name="local" id="local" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Salvar Cliente</button>
+        </form>
+    </div>
+
+    <footer class="text-center text-muted mt-5 mb-3">
+        <small>Desenvolvido por João Victor | UFMA © {{ date('Y') }}</small>
+    </footer>
+
 </body>
 </html>

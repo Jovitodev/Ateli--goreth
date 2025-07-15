@@ -39,6 +39,13 @@
 
             <button type="submit">Salvar Alterações</button>
         </form>
+        
+        <form action="{{ route('pedidos.destroy', $pedido->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este pedido?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger">🗑️ Excluir</button>
+        </form>
+
     @endforeach
 
     <br>

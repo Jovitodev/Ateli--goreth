@@ -39,16 +39,16 @@ class PedidoController extends Controller
 
         if (!$cliente_id) {
             return redirect()->route('clientes.index')->with('error', 'Cliente não especificado.');
-    }
+        }
 
         $pedidos = Pedido::with('cliente')->where('cliente_id', $cliente_id)->get();
 
-            return view('pedidos.index', compact('pedidos', 'cliente_id'));
+        return view('pedidos.index', compact('pedidos', 'cliente_id'));
     }
 
     public function preview(Request $request)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'cliente_id' => 'required|exists:clientes,id',
             'tipo_pedido' => 'required|string',
             'valor' => 'required|numeric',
@@ -58,7 +58,7 @@ class PedidoController extends Controller
 
         $cliente = Cliente::find($validated['cliente_id']);
 
-             return view('pedidos.preview', compact('validated', 'cliente'));
+        return view('pedidos.preview', compact('validated', 'cliente'));
     }
 
     public function confirm(Request $request)
@@ -77,22 +77,55 @@ class PedidoController extends Controller
             ->with('success', 'Pedido cadastrado com sucesso!');
     }
 
+    public function destroy($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->delete();
+
+        return redirect()->back()->with('success', 'Pedido excluído com sucesso!');
+    }
 
     public function update(Request $request, Pedido $pedido)
     {
-    $request->validate([
-        'tipo_pedido' => 'required|string|max:255',
-        'status_pagamento' => 'required|in:sim,não',
-        'status_execucao' => 'required|in:não concluído,pendente,em andamento,aprovação,concluído',
-    ]);
+        $validated = $request->validate([
+            'status_pagamento' => 'nullable|in:sim,não',
+            'status_execucao' => 'required|in:não concluído,pendente,em andamento,aprovação,concluído',
+            'tipo_pedido' => 'nullable|string|max:255', // se vier de formulário de edição
+        ]);
 
-    $pedido->update([
-        'tipo_pedido' => $request->tipo_pedido,
-        'status_pagamento' => $request->status_pagamento,
-        'status_execucao' => $request->status_execucao,
-    ]);
+        // Atualiza os campos que estiverem presentes
+        if ($request->has('tipo_pedido')) {
+            $pedido->tipo_pedido = $validated['tipo_pedido'];
+        }
 
-    return redirect()->route('clientes.pedidos', $pedido->cliente_id)
-                     ->with('success', 'Pedido atualizado com sucesso.');
+        if ($request->has('status_pagamento')) {
+            $pedido->status_pagamento = $validated['status_pagamento'];
+        }
+
+        if ($request->has('status_execucao')) {
+            $pedido->status_execucao = $validated['status_execucao'];
+        }
+
+        $pedido->save();
+
+        // Decide onde redirecionar com base na origem
+        if (url()->previous() === route('pedidos.kanban')) {
+            return redirect()->route('pedidos.kanban')->with('success', 'Status atualizado com sucesso!');
+        }
+
+        return redirect()->route('clientes.pedidos', $pedido->cliente_id)
+            ->with('success', 'Pedido atualizado com sucesso.');
+    }
+
+    public function kanban()
+    {
+        $pedidos = Pedido::with('cliente')->get();
+        return view('pedidos.index-kanban', compact('pedidos'));
+    }
+
+    public function show($id)
+    {
+        $pedido = Pedido::with('cliente')->findOrFail($id);
+        return view('pedidos.show', compact('pedido'));
     }
 }
